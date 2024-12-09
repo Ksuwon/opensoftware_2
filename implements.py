@@ -36,7 +36,9 @@ class Block(Basic):
     def collide(self):
         # ============================================
         # TODO: Implement an event when block collides with a ball
-        pass
+        self.alive =False
+        self.rect.size = (0,0)
+        return self.alive
 
 
 class Paddle(Basic):
