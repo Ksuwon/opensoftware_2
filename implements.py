@@ -7,7 +7,6 @@ import config
 import pygame
 from pygame.locals import Rect, K_LEFT, K_RIGHT
 
-
 class Basic:
     def __init__(self, color: tuple, speed: int = 0, pos: tuple = (0, 0), size: tuple = (0, 0)):
         self.color = color
@@ -33,11 +32,15 @@ class Block(Basic):
     def draw(self, surface) -> None:
         pygame.draw.rect(surface, self.color, self.rect)
     
-    def collide(self):
+    def collide(self, items_list):
         # ============================================
         # TODO: Implement an event when block collides with a ball
         self.alive =False
         self.rect.size = (0,0)
+        if random.random() < 0.2:  # 20% 확률
+            item_color = (0, 0, 255) if random.random() < 0.5 else (255, 0, 0)  # 파란 공 또는 빨간 공
+            item = Basic(color=item_color, pos=self.pos, size=config.item_size)
+            items_list.append(item)  # 매개변수로 전달된 리스트에 추가
         return self.alive
 
 
@@ -67,12 +70,11 @@ class Ball(Basic):
     def draw(self, surface):
         pygame.draw.ellipse(surface, self.color, self.rect)
 
-    def collide_block(self, blocks: list):
-        # ============================================
-        # TODO: Implement an event when the ball hits a block
-        for block in blocks:
+    def collide_block(self, blocks: list, items_list):
+        for block in blocks[:]:
             if self.rect.colliderect(block.rect):
-                Block.collide(block)
+                block.collide(items_list)
+                blocks.remove(block)
                 self.dir = 360 - self.dir + random.randint(-5,5)
 
     def collide_paddle(self, paddle: Paddle) -> None:
