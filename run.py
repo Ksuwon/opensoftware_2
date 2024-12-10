@@ -112,7 +112,7 @@ def main():
         surface.blit(life_font, config.life_pos)
 
         for item in ITEMS:
-            pygame.draw.rect(surface, item.color, item.rect)
+            pygame.draw.ellipse(surface, item.color, item.rect)
 
         if len(BALLS) == 0:
             if life > 1:
