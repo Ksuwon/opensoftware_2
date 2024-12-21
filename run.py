@@ -63,11 +63,23 @@ def tick():
             ball.rect.centerx = paddle.rect.centerx
             ball.rect.bottom = paddle.rect.top
 
-        ball.collide_block(BLOCKS)
+        ball.collide_block(BLOCKS, ITEMS)
         ball.collide_paddle(paddle)
         ball.hit_wall()
         if ball.alive() == False:
             BALLS.remove(ball)
+
+    # 아이템 움직임
+    for item in ITEMS[:]:
+        item.rect.move_ip(0, 5)  # 아래로 떨어짐
+        if item.rect.top > config.display_dimension[1]:  # 화면 밖으로 나가면 제거
+            ITEMS.remove(item)
+        elif item.rect.colliderect(paddle.rect):  # 패들과 충돌
+            ITEMS.remove(item)
+            if item.color == (0, 0, 255):  # 파란 공 효과
+                pass
+            elif item.color == (255, 0, 0):  # 빨간 공 효과
+                pass
 
 
 def main():
@@ -98,6 +110,9 @@ def main():
 
         surface.blit(score_txt, config.score_pos)
         surface.blit(life_font, config.life_pos)
+
+        for item in ITEMS:
+            pygame.draw.ellipse(surface, item.color, item.rect)
 
         if len(BALLS) == 0:
             if life > 1:
