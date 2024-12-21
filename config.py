@@ -1,6 +1,6 @@
 # Setting for Blocks
 # Number of blocks
-num_blocks = (5, 3)
+num_blocks = (5, 6)
 # Size of margin
 margin = (60, 40)
 # Size of block

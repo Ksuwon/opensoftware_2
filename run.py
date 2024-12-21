@@ -22,19 +22,25 @@ start = False
 
 
 def create_blocks():
-    for i in range(config.num_blocks[0]):
-        for j in range(config.num_blocks[1]):
+
+    cols, rows = config.num_blocks  # 행(row)과 열(col)을 가져옴
+    for i in range(cols):
+        for j in range(rows):
             x = config.margin[0] + i * (config.block_size[0] + config.spacing[0])
             y = (
                 config.margin[1]
                 + config.scoreboard_height
                 + j * (config.block_size[1] + config.spacing[1])
             )
-            color_index = j % len(config.colors)
-            color = config.colors[color_index]
-            block = Block(color, (x, y))
+            if j == rows - 1:  # 맨 아래 행은 깨지지 않는 벽 블럭
+                if i == 2:
+                    color_index = j % len(config.colors) # 한칸은 깨지는 벽으로 둠
+                    block = Block(color=config.colors[color_index], pos=(x, y), alive=True, is_wall=False)
+                else: block = Block(color=(128, 128, 128), pos=(x, y), alive=True, is_wall=True)
+            else:  # 나머지는 깨지는 블럭
+                color_index = j % len(config.colors)
+                block = Block(color=config.colors[color_index], pos=(x, y), alive=True, is_wall=False)
             BLOCKS.append(block)
-
 
 def tick():
     global life
