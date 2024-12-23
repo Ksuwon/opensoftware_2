@@ -14,13 +14,14 @@
 - 종료 --> Esc 
 
 ## 게임 주요기능
-1. ITEM DROP (issue\#2)<br>
+1. **ITEM DROP (issue\#2)**<br>
 블록을 깨면 20%의 확률로 아이템(빨간색 공 또는 파란색 공 중 하나)이 떨어지도록 구현했습니다. <br>
 그러나 빨간색 공과 파란색 공은 아직 구현된 기능이 없으므로, 패들과 닿을 경우 사라지도록 설정되어 있습니다.
 <p align = "center">
   <img src="https://github.com/user-attachments/assets/45271208-4533-4db2-9449-37bb64c4c6ef" width="300" alt="image">
 </p>
-2. GREY WALL BLOCK & MULTI-HIT BLOCKS <br>
+
+2. **GREY WALL BLOCK & MULTI-HIT BLOCKS(issue\#3)**<br>
 회색 벽 블록, 여러번 부딪혀야 깨지는 블록을 구현했습니다. 회색 벽 블록에 공이 부딪히면 회색 벽은 깨지지 않고, 공은 회색 벽에 의해 튕겨 나갑니다. <br>
 블록은 노랑 블록, 주황 블록, 빨강 블록으로 이루어져 있습니다. 
 노랑 블록은 한 번에 깨지며, 주황 블록은 두 번 부딪혀야 깨지고, 깨지면서 주황 블록은 노랑 블록으로 변합니다.
